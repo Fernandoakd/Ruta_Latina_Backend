@@ -9,7 +9,6 @@ const ENVIROMENT = {
     EMAIL_USERNAME: process.env.EMAIL_USERNAME,
     URL_FRONTEND: process.env.URL_FRONTEND,
     URL_BACKEND: process.env.URL_BACKEND,
-    API_KEY: process.env.API_KEY,
 };
 
 export default ENVIROMENT;
