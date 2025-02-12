@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 mongoose
-    .connect("mongodb://localhost:27017/ruta-latina")
+    .connect("mongodb+srv://fernandoakdvaldez:skHwaub99XVMGumr@rutalatinamdb.rds7v.mongodb.net/rutalatina?retryWrites=true&w=majority&appName=RutaLatinaMDB")
     .then(() => {
         console.log("Conexion con mongoDB exitosa!");
     })
