@@ -51,14 +51,14 @@ Para clonar y ejecutar este proyecto en tu máquina local, sigue estos pasos:
     npm i
     ```
 
-4. Configuralas variables de entorno en un archivo **.env** con los siguientes valores:
-    PORT=3000
-    JWT_SECRET=tu_secret_jwt
-    EMAIL_USERNAME=tu_email@gmail.com
-    EMAIL_PASSWORD=tu_contraseña
-    CLOUDINARY_CLOUD_NAME=tu_cloud_name
-    CLOUDINARY_API_KEY=tu_api_key
-    CLOUDINARY_API_SECRET=tu_api_secret
+4. Configura las variables de entorno en un archivo **.env** con los siguientes valores:
+    - PORT=3000
+    - JWT_SECRET=tu_secret_jwt
+    - EMAIL_USERNAME=tu_email@gmail.com
+    - EMAIL_PASSWORD=tu_contraseña
+    - CLOUDINARY_CLOUD_NAME=tu_cloud_name
+    - CLOUDINARY_API_KEY=tu_api_key
+    - CLOUDINARY_API_SECRET=tu_api_secret
 
     Nota: Las variables de Cloudinary solo se usaron para precargar imágenes en Postman. No es necesario configurarlas si no se van a subir imágenes desde la app.
 
