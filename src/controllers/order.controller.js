@@ -1,5 +1,5 @@
-import Order from "../models/Order.model.js";
-import Package from "../models/Package.model.js";
+import OrderRepository from "../repository/order.repository.js";
+import PackageRepository from "../repository/package.repository.js";
 import { sendMail, bookingMailBody } from "../utils/mail.util.js";
 
 export const createOrderController = async (req, res) => {
@@ -14,7 +14,7 @@ export const createOrderController = async (req, res) => {
             });
         }
 
-        const packageFound = await Package.findById(packageId);
+        const packageFound = await PackageRepository.findPackageById(packageId);
         
         if (!packageFound) {
             return res.status(404).json({
@@ -23,7 +23,7 @@ export const createOrderController = async (req, res) => {
             });
         }
 
-        const newOrder = new Order({
+        const newOrder = await OrderRepository.createOrder({
             user: userId || null,
             package: packageId,
             name,
@@ -31,8 +31,6 @@ export const createOrderController = async (req, res) => {
             email,
             status: "Pendiente",
         });
-
-        await newOrder.save();
 
         await sendMail({
             to: email,
@@ -57,11 +55,7 @@ export const createOrderController = async (req, res) => {
 export const getUserOrdersController = async (req, res) => {
     try {
         const userId = req.user.id;
-
-        const orders = await Order.find({ user: userId }).populate(
-            "package",
-            "destTitle package_img location fees"
-        );
+        const orders = await OrderRepository.findOrdersByUserId(userId);
 
         return res.status(200).json({
             ok: true,

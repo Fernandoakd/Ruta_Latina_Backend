@@ -1,4 +1,4 @@
-import Package from "../models/Package.model.js";
+import PackageRepository from "../repository/package.repository.js";
 import cloudinary from "../config/cloudinary.config.js";
 import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
@@ -35,7 +35,7 @@ export const uploadPackages = async (req, res) => {
                 });
             }
 
-            const newPackage = new Package({
+            const newPackage = await PackageRepository.createPackage({
                 package_img: packageImageUrl,
                 destTitle: pkg.destTitle,
                 location: pkg.location,
@@ -46,7 +46,6 @@ export const uploadPackages = async (req, res) => {
                 popularity: pkg.popularity,
             });
 
-            await newPackage.save();
             uploadedPackages.push(newPackage);
         }
 
@@ -65,9 +64,8 @@ export const uploadPackages = async (req, res) => {
 };
 
 export const getPackages = async (req, res) => {
-
     try {
-        const packages = await Package.find();
+        const packages = await PackageRepository.findAllPackages();
         return res.status(200).json({
             ok: true,
             data: packages,
@@ -82,10 +80,9 @@ export const getPackages = async (req, res) => {
 };
 
 export const getPackage = async (req, res) => {
-    
     try {
         const { package_id } = req.params;
-        const packageData = await Package.findById(package_id);
+        const packageData = await PackageRepository.findPackageById(package_id);
 
         if (!packageData) {
             return res.status(404).json({
